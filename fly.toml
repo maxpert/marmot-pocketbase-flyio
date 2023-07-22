@@ -10,7 +10,7 @@ region = "dfw"
 # optional if you want to change the PocketBase version
 [build.args]
   PB_VERSION="0.16.8"
-  MARMOT_VERSION="v0.8.4-beta.2"
+  MARMOT_VERSION="v0.8.4-beta.3"
 
 [[services]]
   http_checks          = []
@@ -18,7 +18,7 @@ region = "dfw"
   processes            = ["app"]
   protocol             = "tcp"
   min_machines_running = 2
-  auto_stop_machines   = true
+  auto_stop_machines   = false
   auto_start_machines  = true
   script_checks = []
   [services.concurrency]

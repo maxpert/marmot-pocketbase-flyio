@@ -27,13 +27,21 @@ MARMOT_CONFIG=$(cat << EOM
 db_path="/pb/pb_data/data.db"
 node_id=${NODE_ID}
 
+[snapshot]
+enabled=true
+store="nats"
+interval=60_000
+
+[snapshot.nats]
+replicas=2
+
 [replication_log]
 shards=1
-max_entries=128
+replicas=2
+max_entries=1024
 compress=true
 
 [logging]
-verbose=true
 format="console"
 EOM
 )

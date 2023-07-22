@@ -1,7 +1,7 @@
 FROM debian:bookworm-slim
 
 ARG PB_VERSION=0.16.6
-ARG MARMOT_VERSION=v0.8.4-beta.1
+ARG MARMOT_VERSION=v0.8.4-beta.3
 
 RUN apt update && apt install unzip dnsutils sqlite3 curl wget -y
     
