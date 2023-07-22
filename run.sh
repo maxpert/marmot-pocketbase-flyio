@@ -28,12 +28,7 @@ db_path="/pb/pb_data/data.db"
 node_id=${NODE_ID}
 
 [snapshot]
-enabled=true
-store="nats"
-interval=60_000
-
-[snapshot.nats]
-replicas=2
+enabled=false
 
 [replication_log]
 shards=1
