@@ -27,9 +27,6 @@ MARMOT_CONFIG=$(cat << EOM
 db_path="/pb/pb_data/data.db"
 node_id=${NODE_ID}
 
-[snapshot]
-enabled=false
-
 [replication_log]
 shards=1
 replicas=2
@@ -41,6 +38,28 @@ format="console"
 EOM
 )
 
+# Enable disable snapshots based on WEBDAV_URL
+if [ -z "$WEBDAV_URL" ]; then
+    MARMOT_CONFIG="${MARMOT_CONFIG}"$(cat << EOM
+
+[snapshot]
+enable=false
+EOM
+)
+else
+    MARMOT_CONFIG="${MARMOT_CONFIG}"$(cat << EOM
+
+[snapshot]
+enable=true
+store='webdav'
+interval=3600_000
+
+[snapshot.webdav]
+url="${WEBDAV_URL}"
+EOM
+)
+fi
+
 echo "$MARMOT_CONFIG" > ./marmot-config.toml
 
 # Start marmot in a loop
@@ -48,7 +67,8 @@ while true; do
     sleep 1
 
     # Launch!
-    echo "Launching marmot with -config ./marmot-config.toml -cluster-addr [${FLY_PRIVATE_IP}]:4222 -cluster-peers dns://global.${FLY_APP_NAME}.internal:4222/"
+    echo "Launching marmot ..."
+    GOMEMLIMT=32MiB \
     /pb/marmot -config ./marmot-config.toml -cluster-addr "[${FLY_PRIVATE_IP}]:4222" -cluster-peers "dns://global.${FLY_APP_NAME}.internal:4222/" &
     MARMOT_ID=$!
 
