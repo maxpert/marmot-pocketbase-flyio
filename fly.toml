@@ -9,8 +9,8 @@ region = "dfw"
 
 # optional if you want to change the PocketBase version
 [build.args]
-  PB_VERSION="0.16.8"
-  MARMOT_VERSION="v0.8.4-beta.6"
+  PB_VERSION="0.19.3"
+  MARMOT_VERSION="v0.8.6"
 
 [[services]]
   http_checks          = []
