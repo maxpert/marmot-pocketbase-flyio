@@ -1,7 +1,7 @@
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
-region = "dfw"
+region = "ams"
 
 [experimental]
   allowed_public_ports = []
